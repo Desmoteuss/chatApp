@@ -1,5 +1,5 @@
 const { ApolloServer} = require('apollo-server');
-
+const { sequelize } = require('./models')
 
 
 const resolvers = require('./graphqp/resolvers')
@@ -12,4 +12,7 @@ const server = new ApolloServer({
 
 server.listen().then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
+  sequelize.authenticate()
+  .then(() => console.log('connected!!'))
+  .catch((err) => console.log(err))
 });
